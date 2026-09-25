@@ -1,0 +1,337 @@
+@font-face {
+  font-family: "Akira Expanded";
+  src: url("../assets/fonts/Akira%20Expanded%20Demo.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Consolas";
+  src: url("../assets/fonts/Consolas-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Consolas";
+  src: url("../assets/fonts/Consolas-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --oms-purple: #6736ed;
+  --oms-black: #000;
+  --oms-text: #9a8ea8;
+  --oms-muted: #615a67;
+  --oms-rule: #39343e;
+  --page-gutter: clamp(1.4rem, 6vw, 7.5rem);
+  --oms-heading-size: clamp(0.72rem, calc(0.9rem + 0.3vmin), 2rem);
+  --oms-tagline-size: clamp(0.6rem, calc(0.72rem + 0.3vmin), 1.1rem);
+  --oms-copy-size: clamp(0.6rem, calc(0.72rem + 0.2vmin), 0.9rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html {
+  min-width: 20rem;
+  background: var(--oms-black);
+  scrollbar-color: #39343e var(--oms-black);
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+  width: 2px;
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--oms-black);
+}
+
+html::-webkit-scrollbar-thumb {
+  min-height: 3rem;
+  border-radius: 999px;
+  background: #39343e;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--oms-muted);
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--oms-text);
+  background: var(--oms-black);
+  font-family: "Consolas", "Courier New", monospace;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+a,
+button {
+  -webkit-user-drag: none;
+}
+
+.oms-scroll-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.oms-hero {
+  position: sticky;
+  z-index: 0;
+  top: 0;
+  display: grid;
+  min-height: 88vh;
+  min-height: 88svh;
+  place-items: center;
+  padding: 4rem var(--page-gutter);
+}
+
+.oms-mark {
+  --oms-scroll-scale: 1;
+  --oms-scroll-offset: 0px;
+  position: relative;
+  width: min(41vw, 48rem);
+  min-width: 18rem;
+  text-align: center;
+  transform: translateY(calc(0.4rem + var(--oms-scroll-offset))) scale(var(--oms-scroll-scale));
+  transform-origin: center top;
+  will-change: transform;
+}
+
+.pixel-reveal-pending .oms-mark > img,
+.pixel-reveal-pending .oms-mark > h1 {
+  opacity: 0;
+}
+
+.pixel-reveal-active .oms-mark > img {
+  opacity: 1;
+}
+
+.pixel-reveal-active .oms-mark > h1 {
+  opacity: var(--tagline-reveal-opacity, 0);
+}
+
+.pixel-reveal-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: var(--pixel-reveal-canvas-opacity, 1);
+  pointer-events: none;
+}
+
+.oms-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 0.55px rgba(255, 255, 255, 0.9));
+}
+
+.oms-mark h1 {
+  margin: clamp(1.45rem, 3.4vh, 2.4rem) 0 0;
+  font-family: "Akira Expanded", "Consolas", "Courier New", monospace;
+  font-size: var(--oms-tagline-size);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  color: var(--oms-text);
+  white-space: nowrap;
+}
+
+.oms-information {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 86vh;
+  min-height: 86svh;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--oms-information-padding-top, clamp(6.5rem, 14.5vh, 10rem)) var(--page-gutter) clamp(1.5rem, 4vh, 3.25rem);
+}
+
+.information-grid {
+  display: grid;
+  width: min(100%, 68rem);
+  margin-inline: auto;
+  grid-template-columns: minmax(18rem, 32rem) minmax(13rem, 1fr);
+  gap: clamp(7rem, 16vw, 15rem);
+  align-items: start;
+  font-family: "Akira Expanded", "Consolas", "Courier New", monospace;
+}
+
+.reveal-enabled .information-grid {
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition:
+    opacity 600ms ease-out,
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-enabled .information-grid.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.oms-scroll-guard:not(.oms-has-scrolled) .information-grid {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.information-grid h2 {
+  margin: 0 0 clamp(1rem, 2.5vh, 1.5rem);
+  font-size: var(--oms-heading-size);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: var(--oms-text);
+  text-transform: uppercase;
+}
+
+.information-grid p,
+.information-grid a,
+.oms-footer {
+  font-size: var(--oms-copy-size);
+  font-family: "Akira Expanded", "Consolas", "Courier New", monospace;
+  line-height: 1.35;
+}
+
+.about-block p {
+  max-width: 31rem;
+  margin: 0;
+  color: var(--oms-muted);
+}
+
+.contacts-block a {
+  color: var(--oms-muted);
+  text-decoration: none;
+  text-underline-offset: 0.35em;
+  transition: color 160ms ease;
+}
+
+.contacts-block {
+  justify-self: end;
+}
+
+.contacts-block a:hover,
+.contacts-block a:focus-visible,
+.oms-footer a:hover,
+.oms-footer a:focus-visible {
+  color: var(--oms-purple);
+}
+
+.contacts-block a:focus-visible,
+.oms-footer a:focus-visible {
+  outline: 1px solid var(--oms-purple);
+  outline-offset: 4px;
+}
+
+.oms-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: clamp(1rem, 2.5vh, 1.6rem);
+  border-top: 1px solid var(--oms-rule);
+  color: var(--oms-muted);
+}
+
+.oms-footer p {
+  margin: 0;
+}
+
+.oms-footer a {
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@media (max-width: 48rem) {
+  .oms-mark {
+    width: min(78vw, 34rem);
+  }
+
+  .oms-information {
+    --oms-information-padding-top: clamp(5rem, 10vh, 7rem);
+  }
+
+  .information-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(5rem, 12vh, 8rem);
+  }
+
+  .contacts-block {
+    justify-self: start;
+  }
+
+  .about-block p {
+    max-width: 33rem;
+  }
+}
+
+@media (max-width: 32rem) {
+  .oms-mark {
+    width: 84vw;
+    min-width: 0;
+  }
+
+  .oms-information {
+    min-height: max(86svh, 40rem);
+  }
+
+  .oms-footer {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 48rem) and (min-width: 33rem) and (max-height: 30rem) {
+  .information-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, max-content);
+    gap: clamp(2rem, 8vw, 5rem);
+  }
+
+  .contacts-block {
+    justify-self: end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal-enabled .information-grid {
+    opacity: 1;
+    transform: none;
+  }
+
+  .pixel-reveal-pending .oms-mark > img,
+  .pixel-reveal-pending .oms-mark > h1,
+  .pixel-reveal-active .oms-mark > img,
+  .pixel-reveal-active .oms-mark > h1 {
+    opacity: 1;
+  }
+}

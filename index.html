@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="OMS - By OVG! Media">
+    <meta name="theme-color" content="#000000">
+    <title>OMS - By OVG! Media</title>
+    <link rel="icon" href="./assets/images/oms-icon.png?v=20260913-2" type="image/png">
+    <link rel="apple-touch-icon" href="./assets/images/oms-icon.png?v=20260913-2">
+    <link
+      rel="preload"
+      href="./assets/fonts/Akira%20Expanded%20Demo.otf"
+      as="font"
+      type="font/otf"
+      crossorigin
+    >
+    <script>
+      document.documentElement.classList.add(
+        "pixel-reveal-pending",
+        "oms-scroll-guard",
+      );
+      window.__omsPixelRevealFallback = window.setTimeout(() => {
+        document.documentElement.classList.remove("pixel-reveal-pending");
+      }, 4000);
+    </script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/reveal.js" defer></script>
+    <script src="./js/hero-scroll.js" defer></script>
+    <script src="./js/hero-pixel-reveal.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <div class="oms-scroll-stage">
+        <section class="oms-hero" aria-labelledby="oms-tagline">
+          <div class="oms-mark">
+            <img
+              src="./assets/images/oms-logo.png"
+              width="1800"
+              height="579"
+              alt="OMS"
+              draggable="false"
+            >
+            <h1 id="oms-tagline">By OVG! Media</h1>
+          </div>
+        </section>
+
+        <section class="oms-information" id="information" aria-label="About and contact">
+          <div class="information-grid">
+            <article class="about-block">
+              <h2>About</h2>
+              <p class="replaceable-about-copy">
+                An internet driven record label
+              </p>
+            </article>
+
+            <aside class="contacts-block">
+              <h2>Contact</h2>
+              <a href="mailto:contact@ovgmedia.com">contact@ovgmedia.com</a>
+            </aside>
+          </div>
+
+          <footer class="oms-footer">
+            <p>Copyright OVG! Media / OMS Records, 2026</p>
+          </footer>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
