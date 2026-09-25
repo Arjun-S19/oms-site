@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
-const publicEntries = ["assets", "css", "js", "index.html", ".nojekyll"];
+const publicEntries = ["assets", "css", "js", "index.html", "404.html", ".nojekyll"];
 
 if (path.dirname(dist) !== root || path.basename(dist) !== "dist") {
   throw new Error(`Refusing to replace unsafe build path: ${dist}`);
